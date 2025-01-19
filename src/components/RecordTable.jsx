@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { getRecords } from "../api/api";
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 

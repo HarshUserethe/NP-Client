@@ -71,23 +71,26 @@ const DailyTracker = () => {
   }, []);
 
   return (
-    <div className="tracker-container">
-      <div className="stats">
-        <Typography variant="h6">Total Days: {activeRecord?.daysCount || "00"}</Typography>
-        <Typography variant="h6">Total Cost: ₹{activeRecord?.totalCost || 0}</Typography>
+    <div className="tracker-container" style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
+      <div className="stats" style={{display:"flex", justifyContent:"space-evenly", alignItems:"center", width:"100%"}}>
+        <Typography variant="h6" style={{fontSize:"1rem"}}>Total Days: {activeRecord?.daysCount || "00"}</Typography>
+        <Typography> | </Typography> 
+        <Typography variant="h6" style={{fontSize:"1rem"}}>Total Cost: ₹{activeRecord?.totalCost || 0}</Typography>
       </div>
 
-      <div className="circle">
+      <div className="circle" style={{border:"1px solid #fff"}}>
         <Typography variant="h2">₹{activeRecord?.totalCost || 0}</Typography>
-        <Typography variant="subtitle1">Newspaper Cost: ₹{calculateCost()}</Typography>
+        <Typography variant="subtitle1">Today's Cost: ₹{calculateCost()}</Typography>
       </div>
 
-      <Button
+<div style={{display:"flex", justifyContent:"space-evenly", width:"85%"}}>
+<Button
         variant="contained"
         className="new-record-btn"
         onClick={handleBillPaid}
+        style={{backgroundColor:"green", border:"1px solid #fff"}}
       >
-        {activeRecord ? "Mark Bill Paid" : "Start New Record"}
+        {activeRecord ? "Bill Paid" : "Start New"}
       </Button>
 
       {activeRecord && (
@@ -95,29 +98,35 @@ const DailyTracker = () => {
           variant="outlined"
           className="no-paper-btn"
           onClick={handleNoPaperToday}
+          style={{color:"#fff", borderColor:"#fff"}}
         >
-          No Paper Today
+          No Paper
         </Button>
       )}
+</div>
 
-      <div className="records">
-        <Typography variant="h5">Records</Typography>
+      <div className="records" style={{height:"270px", overflowY:"auto", width:"100%"}}>
+        <Typography variant="h5" style={{fontSize:"1rem", marginBottom:"10px"}}>Records</Typography>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Start Date</TableCell>
               <TableCell>End Date</TableCell>
-              <TableCell>Total Cost</TableCell>
+              <TableCell>Cost</TableCell>
               <TableCell>Days</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {records.map((record, index) => (
               <TableRow key={index}>
-                <TableCell>{record.startDate || "-"}</TableCell>
-                <TableCell>{record.endDate || "-"}</TableCell>
-                <TableCell>₹{record.totalCost}</TableCell>
-                <TableCell>{record.daysCount}</TableCell>
+              <TableCell style={{ color: "#fff" }}>
+  {record.startDate ? new Date(record.startDate).toLocaleDateString('en-GB') : "-"}
+</TableCell>
+<TableCell style={{ color: "#fff" }}>
+  {record.endDate ? new Date(record.endDate).toLocaleDateString('en-GB') : "-"}
+</TableCell>
+                <TableCell style={{color:"#fff"}}>₹{record.totalCost}</TableCell>
+                <TableCell style={{color:"#fff"}}>{record.daysCount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
