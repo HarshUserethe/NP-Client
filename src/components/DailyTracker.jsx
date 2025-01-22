@@ -182,7 +182,7 @@ const DailyTracker = () => {
             </TableRow>
           </TableHead>
 
-          {isLoading ? (
+          {isLoading || records.length === 0 ? (
             <div
               style={{
                 width: "100%",
